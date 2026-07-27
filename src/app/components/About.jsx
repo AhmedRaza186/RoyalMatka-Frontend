@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,7 +5,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden bg-brand-charcoal py-20 md:py-28"
+      className="relative overflow-hidden bg-brand-charcoal py-20 md:py-28 border-t border-brand-gold/10"
     >
       {/* Decorative Background */}
       <div className="absolute -left-32 top-1/4 h-72 w-72 rounded-full bg-brand-gold/5 blur-[100px] pointer-events-none" />
@@ -20,23 +18,24 @@ export default function About() {
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
 
           {/* Left: Image Composition */}
-          <div className="relative mx-auto w-full max-w-xl">
+          <div className="relative mx-auto w-full max-w-xl group">
 
             {/* Decorative Frame */}
-            <div className="absolute -left-3 -top-3 h-full w-full rounded-3xl border border-brand-gold/30" />
+            <div className="absolute -left-3 -top-3 h-full w-full rounded-3xl border border-brand-gold/30 transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1" />
 
             {/* Main Image */}
-            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-[#161311] shadow-2xl">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-[#161311] shadow-2xl border border-brand-gold/10">
               <Image
-                src="/checkn-rp9utt4i4dtcgb25qe934587dnajlqea7cvrg9y6eo.jpg"
-                alt="Traditional Royal Matka Biryani"
+                src="/nulli-rp9w9hb3tijsom0508broltez6lxqqj2z3xo6vc2cw.jpg"
+                alt="Traditional Royal Nalli Matka Biryani Cooking"
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover transition-transform duration-700 hover:scale-105"
+                priority
               />
 
               {/* Image Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/80 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/80 via-brand-charcoal/10 to-transparent" />
 
               {/* Image Badge */}
               <div className="absolute bottom-6 left-6 right-6">
@@ -52,11 +51,14 @@ export default function About() {
               </div>
             </div>
 
-            {/* Floating Decorative Element */}
-            <div className="absolute -bottom-6 -right-4 hidden h-24 w-24 rounded-full border border-brand-gold/30 bg-brand-charcoal sm:block">
-              <div className="flex h-full items-center justify-center">
-                <span className="font-serif text-3xl text-brand-gold">
+            {/* Floating Decorative Stamp/Seal */}
+            <div className="absolute -bottom-6 -right-4 hidden h-24 w-24 rounded-full border-2 border-brand-gold/20 bg-brand-charcoal/90 backdrop-blur-md shadow-2xl sm:block group-hover:scale-105 transition-all duration-300">
+              <div className="flex h-full flex-col items-center justify-center">
+                <span className="font-serif text-2xl font-bold text-brand-gold tracking-widest">
                   R
+                </span>
+                <span className="font-sans text-[8px] uppercase tracking-[0.18em] text-neutral-muted mt-0.5">
+                  EST. 2026
                 </span>
               </div>
             </div>
@@ -77,7 +79,7 @@ export default function About() {
             {/* Heading */}
             <h2 className="font-serif text-4xl font-bold leading-tight text-brand-cream sm:text-5xl lg:text-6xl">
               A Taste of Tradition,
-              <span className="block text-brand-gold">
+              <span className="block text-brand-gold mt-1">
                 Crafted for Royalty
               </span>
             </h2>
@@ -139,7 +141,7 @@ export default function About() {
             <div className="mt-9">
               <Link
                 href="#menu"
-                className="inline-flex items-center justify-center rounded-full border border-brand-gold/50 bg-brand-gold/10 px-7 py-3.5 font-sans text-xs font-bold uppercase tracking-wider text-brand-gold transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-brand-charcoal"
+                className="inline-flex items-center justify-center rounded-full border border-brand-gold/50 bg-brand-gold/10 px-7 py-3.5 font-sans text-xs font-bold uppercase tracking-wider text-brand-gold transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-brand-charcoal hover:shadow-lg hover:shadow-brand-gold/10"
               >
                 Explore Our Menu
               </Link>
@@ -150,4 +152,4 @@ export default function About() {
       </div>
     </section>
   );
-}
+}
