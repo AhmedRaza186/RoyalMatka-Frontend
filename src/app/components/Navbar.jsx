@@ -22,6 +22,8 @@ const NAV_LINKS = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState("dark");
+  const [mounted, setMounted] = useState(false);
 
   // Detect page scroll
   useEffect(() => {
@@ -38,6 +40,15 @@ export default function Navbar() {
     };
   }, []);
 
+  // Detect theme on mount
+  useEffect(() => {
+    /* eslint-disable react-hooks/set-state-in-effect */
+    setMounted(true);
+    const isLight = document.documentElement.classList.contains("light");
+    setTheme(isLight ? "light" : "dark");
+    /* eslint-enable react-hooks/set-state-in-effect */
+  }, []);
+
   // Prevent background scrolling when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
@@ -47,6 +58,21 @@ export default function Navbar() {
     };
   }, [isMobileMenuOpen]);
 
+  // Toggle dark/light theme
+  const toggleTheme = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    if (newTheme === "light") {
+      document.documentElement.classList.remove("dark");
+      document.documentElement.classList.add("light");
+      localStorage.setItem("theme", "light");
+    } else {
+      document.documentElement.classList.remove("light");
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+  };
+
   return (
     <header
       className={`
@@ -54,7 +80,7 @@ export default function Navbar() {
         transition-all duration-300 ease-out
         ${
           isScrolled
-            ? "border-b border-brand-gold/10 bg-brand-charcoal/90 shadow-lg backdrop-blur-xl"
+            ? "border-b border-border-base bg-bg-base/90 shadow-lg backdrop-blur-xl"
             : "bg-transparent"
         }
       `}
@@ -80,7 +106,7 @@ export default function Navbar() {
             </div>
 
             <div className="flex flex-col justify-center leading-none">
-              <span className="font-serif text-[17px] font-semibold tracking-wide text-brand-cream transition-colors duration-300 group-hover:text-brand-gold sm:text-lg">
+              <span className="font-serif text-[17px] font-semibold tracking-wide text-text-base transition-colors duration-300 group-hover:text-brand-gold sm:text-lg">
                 Royal Matka
               </span>
 
@@ -102,7 +128,7 @@ export default function Navbar() {
                 className="
                   group relative py-2
                   font-sans text-[13px] font-medium tracking-normal
-                  text-neutral-light/85
+                  text-text-base/85
                   transition-colors duration-300
                   hover:text-brand-gold
                 "
@@ -123,8 +149,48 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* Desktop CTA */}
-          <div className="hidden lg:flex">
+          {/* Desktop CTA & Theme Toggle */}
+          <div className="hidden lg:flex items-center">
+            {/* Theme Toggle Button (Desktop) */}
+            <button
+              onClick={toggleTheme}
+              type="button"
+              className="
+                inline-flex h-9 w-9
+                items-center justify-center
+                rounded-full
+                border border-border-base
+                bg-transparent
+                text-brand-gold
+                transition-all duration-300
+                hover:bg-brand-gold/10
+                focus:outline-none
+                focus:ring-2
+                focus:ring-brand-gold/50
+                mr-4
+                cursor-pointer
+              "
+              aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+            >
+              {!mounted ? (
+                // Skeleton icon during SSR / mount transition
+                <svg className="h-4.5 w-4.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              ) : theme === "dark" ? (
+                // Moon Icon
+                <svg className="h-4.5 w-4.5 animate-[spin_0.3s_ease-out_1]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              ) : (
+                // Sun Icon
+                <svg className="h-4.5 w-4.5 animate-[spin_0.3s_ease-out_1]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                </svg>
+              )}
+            </button>
+
             <a
               href={WHATSAPP_ORDER_URL}
               target="_blank"
@@ -156,7 +222,7 @@ export default function Navbar() {
               inline-flex h-10 w-10
               items-center justify-center
               rounded-full
-              text-brand-cream
+              text-text-base
               transition-colors duration-300
               hover:bg-brand-gold/10
               hover:text-brand-gold
@@ -214,8 +280,9 @@ export default function Navbar() {
         className={`
           fixed inset-x-0 top-16 bottom-0
           z-40
-          bg-brand-charcoal/98
+          bg-bg-base/98
           backdrop-blur-xl
+          border-t border-border-base/50
           transition-all duration-300 ease-out
           lg:hidden
           ${
@@ -237,10 +304,10 @@ export default function Navbar() {
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="
-                  border-b border-brand-gold/10
+                  border-b border-border-base/40
                   py-4
                   font-serif text-2xl font-medium
-                  text-brand-cream
+                  text-text-base
                   transition-colors duration-300
                   hover:text-brand-gold
                 "
@@ -251,6 +318,47 @@ export default function Navbar() {
           </nav>
 
           <div className="mt-auto pb-8 pt-10">
+            {/* Theme Toggle (Mobile Drawer) */}
+            <div className="flex items-center justify-between pb-6 mb-6 border-b border-border-base/30">
+              <span className="font-sans text-xs font-bold uppercase tracking-wider text-text-muted">
+                Theme Mode
+              </span>
+              <button
+                onClick={toggleTheme}
+                type="button"
+                className="
+                  inline-flex h-10 w-10
+                  items-center justify-center
+                  rounded-full
+                  border border-border-base
+                  bg-transparent
+                  text-brand-gold
+                  transition-colors duration-300
+                  hover:bg-brand-gold/10
+                  focus:outline-none
+                  focus:ring-2
+                  focus:ring-brand-gold/50
+                  cursor-pointer
+                "
+                aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+              >
+                {!mounted ? (
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                  </svg>
+                ) : theme === "dark" ? (
+                  <svg className="h-5 w-5 animate-[spin_0.3s_ease-out_1]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                  </svg>
+                ) : (
+                  <svg className="h-5 w-5 animate-[spin_0.3s_ease-out_1]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m12.728 12.728l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+                  </svg>
+                )}
+              </button>
+            </div>
+
             <a
               href={WHATSAPP_ORDER_URL}
               target="_blank"
@@ -272,7 +380,7 @@ export default function Navbar() {
             </a>
 
             <div className="mt-6 text-center">
-              <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-neutral-muted">
+              <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-text-muted">
                 Need Help? Call Us
               </span>
 

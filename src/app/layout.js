@@ -23,8 +23,23 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       className={`${cormorant.variable} ${jakarta.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col bg-brand-charcoal text-neutral-light font-sans">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var theme = localStorage.getItem('theme') || 'dark';
+                  document.documentElement.classList.add(theme);
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="min-h-full flex flex-col bg-bg-base text-text-base font-sans transition-colors duration-300">
         {children}
       </body>
     </html>

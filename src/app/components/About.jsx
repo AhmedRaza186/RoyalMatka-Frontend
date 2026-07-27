@@ -5,14 +5,14 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden bg-brand-charcoal py-20 md:py-28 border-t border-brand-gold/10"
+      className="relative overflow-hidden bg-bg-base py-20 md:py-28 border-t border-border-base/60 transition-colors duration-300"
     >
       {/* Decorative Background */}
       <div className="absolute -left-32 top-1/4 h-72 w-72 rounded-full bg-brand-gold/5 blur-[100px] pointer-events-none" />
       <div className="absolute -right-32 bottom-1/4 h-72 w-72 rounded-full bg-brand-spice/5 blur-[100px] pointer-events-none" />
 
       {/* Subtle Pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(#2d2724_1px,transparent_1px)] [background-size:24px_24px] opacity-10 pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(var(--border)_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-20 pointer-events-none" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-20">
@@ -24,7 +24,7 @@ export default function About() {
             <div className="absolute -left-3 -top-3 h-full w-full rounded-3xl border border-brand-gold/30 transition-transform duration-500 group-hover:-translate-x-1 group-hover:-translate-y-1" />
 
             {/* Main Image */}
-            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-[#161311] shadow-2xl border border-brand-gold/10">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-3xl bg-surface-secondary shadow-2xl border border-border-base">
               <Image
                 src="/nulli-rp9w9hb3tijsom0508broltez6lxqqj2z3xo6vc2cw.jpg"
                 alt="Traditional Royal Nalli Matka Biryani Cooking"
@@ -35,16 +35,16 @@ export default function About() {
               />
 
               {/* Image Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/80 via-brand-charcoal/10 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-bg-base/80 via-bg-base/10 to-transparent transition-colors duration-300" />
 
               {/* Image Badge */}
               <div className="absolute bottom-6 left-6 right-6">
-                <div className="rounded-2xl border border-brand-gold/25 bg-brand-charcoal/80 p-5 backdrop-blur-md">
+                <div className="rounded-2xl border border-border-base/40 bg-bg-base/80 p-5 backdrop-blur-md transition-colors duration-300">
                   <p className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-brand-gold">
                     Our Promise
                   </p>
 
-                  <p className="mt-1 font-serif text-xl font-semibold text-brand-cream">
+                  <p className="mt-1 font-serif text-xl font-semibold text-text-base">
                     Authentic taste. Timeless tradition.
                   </p>
                 </div>
@@ -52,12 +52,12 @@ export default function About() {
             </div>
 
             {/* Floating Decorative Stamp/Seal */}
-            <div className="absolute -bottom-6 -right-4 hidden h-24 w-24 rounded-full border-2 border-brand-gold/20 bg-brand-charcoal/90 backdrop-blur-md shadow-2xl sm:block group-hover:scale-105 transition-all duration-300">
+            <div className="absolute -bottom-6 -right-4 hidden h-24 w-24 rounded-full border-2 border-border-base/40 bg-bg-base/90 backdrop-blur-md shadow-2xl sm:block group-hover:scale-105 transition-all duration-300">
               <div className="flex h-full flex-col items-center justify-center">
                 <span className="font-serif text-2xl font-bold text-brand-gold tracking-widest">
                   R
                 </span>
-                <span className="font-sans text-[8px] uppercase tracking-[0.18em] text-neutral-muted mt-0.5">
+                <span className="font-sans text-[8px] uppercase tracking-[0.18em] text-text-muted mt-0.5">
                   EST. 2026
                 </span>
               </div>
@@ -77,7 +77,7 @@ export default function About() {
             </div>
 
             {/* Heading */}
-            <h2 className="font-serif text-4xl font-bold leading-tight text-brand-cream sm:text-5xl lg:text-6xl">
+            <h2 className="font-serif text-4xl font-bold leading-tight text-text-base sm:text-5xl lg:text-6xl">
               A Taste of Tradition,
               <span className="block text-brand-gold mt-1">
                 Crafted for Royalty
@@ -85,13 +85,13 @@ export default function About() {
             </h2>
 
             {/* Description */}
-            <p className="mt-6 font-sans text-sm leading-7 text-neutral-muted sm:text-base">
+            <p className="mt-6 font-sans text-sm leading-7 text-text-muted sm:text-base">
               At Royal Matka Biryani, we believe that great food is more than
               just a meal. It is a celebration of tradition, family, and the
               unforgettable flavors that bring people together.
             </p>
 
-            <p className="mt-4 font-sans text-sm leading-7 text-neutral-muted sm:text-base">
+            <p className="mt-4 font-sans text-sm leading-7 text-text-muted sm:text-base">
               Inspired by the rich culinary heritage of Karachi, our biryani
               is carefully prepared with aromatic spices, premium basmati rice,
               and tender marinated meat. Slow-cooked in traditional clay pots,
@@ -104,33 +104,33 @@ export default function About() {
 
               {/* Highlight 1 */}
               <div className="border-l-2 border-brand-gold/40 pl-4">
-                <h3 className="font-serif text-lg font-bold text-brand-cream">
+                <h3 className="font-serif text-lg font-bold text-text-base">
                   Traditional
                 </h3>
 
-                <p className="mt-1 font-sans text-xs leading-5 text-neutral-muted">
+                <p className="mt-1 font-sans text-xs leading-5 text-text-muted">
                   Authentic clay-pot cooking
                 </p>
               </div>
 
               {/* Highlight 2 */}
               <div className="border-l-2 border-brand-gold/40 pl-4">
-                <h3 className="font-serif text-lg font-bold text-brand-cream">
+                <h3 className="font-serif text-lg font-bold text-text-base">
                   Premium
                 </h3>
 
-                <p className="mt-1 font-sans text-xs leading-5 text-neutral-muted">
+                <p className="mt-1 font-sans text-xs leading-5 text-text-muted">
                   Carefully selected ingredients
                 </p>
               </div>
 
               {/* Highlight 3 */}
               <div className="border-l-2 border-brand-gold/40 pl-4">
-                <h3 className="font-serif text-lg font-bold text-brand-cream">
+                <h3 className="font-serif text-lg font-bold text-text-base">
                   Authentic
                 </h3>
 
-                <p className="mt-1 font-sans text-xs leading-5 text-neutral-muted">
+                <p className="mt-1 font-sans text-xs leading-5 text-text-muted">
                   Rich Karachi-inspired flavors
                 </p>
               </div>
@@ -141,7 +141,7 @@ export default function About() {
             <div className="mt-9">
               <Link
                 href="#menu"
-                className="inline-flex items-center justify-center rounded-full border border-brand-gold/50 bg-brand-gold/10 px-7 py-3.5 font-sans text-xs font-bold uppercase tracking-wider text-brand-gold transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-brand-charcoal hover:shadow-lg hover:shadow-brand-gold/10"
+                className="inline-flex items-center justify-center rounded-full border border-brand-gold/50 bg-brand-gold/5 px-7 py-3.5 font-sans text-xs font-bold uppercase tracking-wider text-brand-gold transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-gold hover:text-bg-base hover:shadow-lg hover:shadow-brand-gold/10"
               >
                 Explore Our Menu
               </Link>

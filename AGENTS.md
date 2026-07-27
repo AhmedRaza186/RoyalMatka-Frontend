@@ -51,4 +51,18 @@
 ## Contact Configuration
 - **WhatsApp Orders**: Configured centrally via `siteConfig.whatsappNumber` in `src/app/config/site.js`. Employs a temporary placeholder number (`923001002222`) with `displayPhone` representation.
 
+## Theme System Configuration
+- **Persistence**: Selected theme is stored in `localStorage` as `"theme"` (`"light"` or `"dark"`).
+- **Default Theme**: Dark Mode (default).
+- **FOUC Prevention**: An inline script in the `RootLayout` (`layout.js`) `<head>` reads from `localStorage` and appends the `.light` or `.dark` class to `<html>` prior to the first page paint, preventing visual flashes.
+- **Tailwind CSS v4 Semantic Tokens**:
+  - `bg-bg-base`: Maps to `--background` (`#0F0C0A` in Dark, `#FAF7F2` in Light)
+  - `text-text-base`: Maps to `--foreground` (`#FAF7F2` in Dark, `#0F0C0A` in Light)
+  - `text-text-muted`: Maps to `--muted` (`#A39E93` in Dark, `#6b6357` in Light)
+  - `bg-surface-base`: Maps to `--surface` (`#131110` in Dark, `#F4EFE6` in Light)
+  - `bg-surface-secondary`: Maps to `--surface-secondary` (`#161311` in Dark, `#ECE5D8` in Light)
+  - `border-border-base`: Maps to `--border` (`rgba(197, 168, 128, 0.15)` in Dark, `rgba(197, 168, 128, 0.25)` in Light)
+  - `border-border-active`: Maps to `--border-active` (`rgba(197, 168, 128, 0.35)` in Dark, `rgba(197, 168, 128, 0.5)` in Light)
+
+
 

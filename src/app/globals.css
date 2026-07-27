@@ -1,7 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand color palette */
+  /* Dynamic theme colors */
+  --color-bg-base: var(--background);
+  --color-text-base: var(--foreground);
+  --color-text-muted: var(--muted);
+  --color-surface-base: var(--surface);
+  --color-surface-secondary: var(--surface-secondary);
+  --color-border-base: var(--border);
+  --color-border-active: var(--border-active);
+  --color-card-bg: var(--card);
+
+  /* Brand color palette (always static) */
   --color-brand-charcoal: #0F0C0A; /* Warm rich dark background */
   --color-brand-cream: #FAF7F2;    /* Warm soft cream for light accents */
   --color-brand-gold: #C5A880;     /* Muted premium gold accent */
@@ -20,8 +30,27 @@
 }
 
 :root {
-  --background: #0F0C0A;
-  --foreground: #F7F4EB;
+  /* Dark Mode variables (Default) */
+  --background: #0F0C0A;          /* Warm rich dark background */
+  --foreground: #FAF7F2;          /* Warm soft cream text */
+  --surface: #131110;             /* Elevated dark surface (cards) */
+  --surface-secondary: #161311;   /* Secondary elevated dark surface */
+  --border: rgba(197, 168, 128, 0.15); /* Low opacity brand-gold border */
+  --border-active: rgba(197, 168, 128, 0.35); /* Active brand-gold border */
+  --muted: #A39E93;               /* Muted grey text */
+  --card: #131110;                /* Card background */
+}
+
+.light {
+  /* Light Mode variables */
+  --background: #FAF7F2;          /* Warm soft cream background */
+  --foreground: #0F0C0A;          /* Warm rich dark text */
+  --surface: #F4EFE6;             /* Elevated warm cream surface (cards) */
+  --surface-secondary: #ECE5D8;   /* Secondary elevated warm surface */
+  --border: rgba(197, 168, 128, 0.25); /* Slightly darker gold border for light mode */
+  --border-active: rgba(197, 168, 128, 0.5); /* Higher visibility gold border */
+  --muted: #6b6357;               /* Darker grey text for high contrast readability */
+  --card: #F4EFE6;                /* Card background */
 }
 
 body {
@@ -29,6 +58,9 @@ body {
   color: var(--foreground);
   font-family: var(--font-jakarta), sans-serif;
   overflow-x: hidden;
+  transition-property: background-color, color, border-color, text-decoration-color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
 }
 
 /* Custom scrollbar to match the premium theme */
@@ -36,10 +68,10 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0F0C0A;
+  background: var(--background);
 }
 ::-webkit-scrollbar-thumb {
-  background: #2D2724;
+  background: var(--surface-secondary);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {

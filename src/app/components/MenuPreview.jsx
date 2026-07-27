@@ -54,7 +54,7 @@ export default function MenuPreview() {
   return (
     <section
       id="menu"
-      className="relative bg-brand-charcoal py-16 md:py-24 border-t border-brand-gold/10"
+      className="relative bg-bg-base py-16 md:py-24 border-t border-border-base/60 transition-colors duration-300"
     >
       {/* Background ambient lighting */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-brand-gold/5 rounded-full filter blur-[120px] pointer-events-none"></div>
@@ -66,7 +66,7 @@ export default function MenuPreview() {
           <span className="font-sans text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-brand-gold">
             Royal Selection
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-brand-cream mt-2 tracking-wide">
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-text-base mt-2 tracking-wide">
             Our Signature Matka Biryanis
           </h2>
           <div className="flex items-center justify-center gap-3 mt-4">
@@ -88,10 +88,10 @@ export default function MenuPreview() {
             return (
               <div
                 key={item.id}
-                className="group flex flex-col h-full bg-[#131110] border border-brand-gold/10 hover:border-brand-gold/25 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300"
+                className="group flex flex-col h-full bg-surface-base border border-border-base hover:border-border-active rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300"
               >
                 {/* Image Wrapper */}
-                <div className="relative h-56 sm:h-64 w-full overflow-hidden bg-brand-charcoal">
+                <div className="relative h-56 sm:h-64 w-full overflow-hidden bg-bg-base">
                   <Image
                     src={item.image}
                     alt={item.name}
@@ -100,7 +100,7 @@ export default function MenuPreview() {
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   {/* Radial shadow overlay to integrate with card design */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#131110] via-transparent to-transparent opacity-60"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-surface-base via-transparent to-transparent opacity-60 transition-colors duration-300"></div>
                   
                   {/* Floating Tag Badge */}
                   {item.tag && (
@@ -112,32 +112,32 @@ export default function MenuPreview() {
 
                 {/* Card Content */}
                 <div className="flex flex-col flex-grow p-6 sm:p-8">
-                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-brand-cream group-hover:text-brand-gold transition-colors duration-300">
+                  <h3 className="font-serif text-xl sm:text-2xl font-bold text-text-base group-hover:text-brand-gold transition-colors duration-300">
                     {item.name}
                   </h3>
                   <span className="font-sans text-[11px] font-medium text-brand-gold/80 mt-1 tracking-wide uppercase">
                     {item.subtitle}
                   </span>
                   
-                  <p className="font-sans text-xs sm:text-sm text-neutral-muted mt-3 leading-relaxed flex-grow">
+                  <p className="font-sans text-xs sm:text-sm text-text-muted mt-3 leading-relaxed flex-grow">
                     {item.description}
                   </p>
 
                   {/* Deals / Sizes pricing table */}
-                  <div className="mt-5 border-t border-brand-gold/10 pt-4">
-                    <span className="font-sans text-[10px] uppercase tracking-wider text-neutral-muted block mb-2.5">
+                  <div className="mt-5 border-t border-border-base/50 pt-4">
+                    <span className="font-sans text-[10px] uppercase tracking-wider text-text-muted block mb-2.5">
                       Available Sizing
                     </span>
                     <div className="space-y-2">
                       {item.sizes.map((size) => (
                         <div
                           key={size.label}
-                          className="flex justify-between items-center text-xs py-0.5 border-b border-brand-gold/5 last:border-0"
+                          className="flex justify-between items-center text-xs py-0.5 border-b border-border-base/30 last:border-0"
                         >
-                          <span className="font-sans text-neutral-light/80">
+                          <span className="font-sans text-text-base/80">
                             {size.label}
                           </span>
-                          <span className="font-sans font-semibold text-brand-cream">
+                          <span className="font-sans font-semibold text-text-base">
                             {size.price}
                           </span>
                         </div>
@@ -150,7 +150,7 @@ export default function MenuPreview() {
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-6 w-full inline-flex items-center justify-center rounded-full bg-brand-spice hover:bg-brand-spice-hover py-3 font-sans text-[11px] font-bold uppercase tracking-wider text-white shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-brand-spice/15 transform hover:-translate-y-0.5 active:translate-y-0"
+                    className="mt-6 w-full inline-flex items-center justify-center rounded-full bg-brand-spice hover:bg-brand-spice-hover py-3 font-sans text-[11px] font-bold uppercase tracking-wider text-white shadow-md transition-all duration-300 hover:shadow-lg hover:shadow-brand-spice/15 transform hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
                   >
                     Order on WhatsApp
                   </a>
@@ -164,7 +164,7 @@ export default function MenuPreview() {
         <div className="mt-16 text-center">
           <Link
             href="#full-menu"
-            className="inline-flex items-center justify-center rounded-full border border-brand-gold/40 text-brand-gold hover:bg-brand-gold hover:text-brand-charcoal px-8 py-3.5 font-sans text-[11px] font-bold uppercase tracking-wider transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0"
+            className="inline-flex items-center justify-center rounded-full border border-brand-gold/45 text-brand-gold hover:bg-brand-gold hover:text-bg-base px-8 py-3.5 font-sans text-[11px] font-bold uppercase tracking-wider transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0"
           >
             View Full Menu & Prices
           </Link>
