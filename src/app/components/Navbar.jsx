@@ -5,8 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "../config/site";
 
-// TEMPORARY PLACEHOLDER WHATSAPP NUMBER - Easily replace with production contact in the future
+// Temporary placeholder WhatsApp number.
+// Replace the value inside siteConfig when the real number is confirmed.
 const PLACEHOLDER_WHATSAPP_NUMBER = siteConfig.whatsappNumber;
+
 const WHATSAPP_ORDER_URL = `https://wa.me/${PLACEHOLDER_WHATSAPP_NUMBER}?text=Hello%20Royal%20Matka%20Biryani%2C%20I%20would%20like%20to%20place%20an%20order%20for%20delicious%20Matka%20Biryani!`;
 
 const NAV_LINKS = [
@@ -21,180 +23,260 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Monitor scroll to apply backdrop effects
+  // Detect page scroll
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 16);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
-  // Prevent scroll when mobile menu is open
+  // Prevent background scrolling when mobile menu is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "";
+
     return () => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = "";
     };
   }, [isMobileMenuOpen]);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-brand-charcoal/95 border-b border-brand-gold/15 backdrop-blur-md shadow-lg"
-          : "bg-transparent"
-      }`}
+      className={`
+        fixed inset-x-0 top-0 z-50
+        transition-all duration-300 ease-out
+        ${
+          isScrolled
+            ? "border-b border-brand-gold/10 bg-brand-charcoal/90 shadow-lg backdrop-blur-xl"
+            : "bg-transparent"
+        }
+      `}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div
-          className={`flex items-center justify-between transition-all duration-300 ${
-            isScrolled ? "h-16" : "h-16 lg:h-[72px]"
-          }`}
-        >
-          {/* Logo / Brand */}
-          <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="flex items-center gap-3 group">
-              <div
-                className={`relative transition-all duration-500 group-hover:scale-105 ${
-                  isScrolled ? "w-9 h-9" : "w-9 h-9 lg:w-11 lg:h-11"
-                }`}
-              >
-                <Image
-                  src="/logo.png"
-                  alt="Royal Matka Biryani Logo"
-                  fill
-                  sizes="(max-width: 1024px) 36px, 44px"
-                  className="object-contain"
-                  priority
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-sans text-sm md:text-base lg:text-lg font-extrabold tracking-wide text-brand-cream group-hover:text-brand-gold transition-colors duration-300">
-                  ROYAL MATKA
-                </span>
-                <span className="font-sans text-[8px] md:text-[9px] uppercase tracking-[0.15em] text-brand-gold font-semibold">
-                  Biryani House
-                </span>
-              </div>
-            </Link>
-          </div>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          
+          {/* Brand */}
+          <Link
+            href="/"
+            className="group flex items-center gap-2.5"
+            aria-label="Royal Matka Biryani Home"
+          >
+            <div className="relative h-9 w-9 shrink-0 transition-transform duration-300 group-hover:scale-105 sm:h-10 sm:w-10">
+              <Image
+                src="/logo.png"
+                alt="Royal Matka Biryani"
+                fill
+                sizes="40px"
+                className="object-contain"
+                priority
+              />
+            </div>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex space-x-6 items-center">
+            <div className="flex flex-col justify-center leading-none">
+              <span className="font-serif text-[17px] font-semibold tracking-wide text-brand-cream transition-colors duration-300 group-hover:text-brand-gold sm:text-lg">
+                Royal Matka
+              </span>
+
+              <span className="mt-1 font-sans text-[8px] font-medium uppercase tracking-[0.22em] text-brand-gold sm:text-[9px]">
+                Biryani House
+              </span>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav
+            className="hidden items-center gap-7 lg:flex"
+            aria-label="Main navigation"
+          >
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className="relative py-1 text-xs lg:text-sm font-semibold tracking-wide text-neutral-light/90 hover:text-brand-gold transition-colors duration-300 group"
+                className="
+                  group relative py-2
+                  font-sans text-[13px] font-medium tracking-normal
+                  text-neutral-light/85
+                  transition-colors duration-300
+                  hover:text-brand-gold
+                "
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-brand-gold transition-all duration-300 group-hover:w-full"></span>
+
+                <span
+                  className="
+                    absolute bottom-0 left-1/2
+                    h-px w-0
+                    -translate-x-1/2
+                    bg-brand-gold
+                    transition-all duration-300
+                    group-hover:w-full
+                  "
+                />
               </Link>
             ))}
           </nav>
 
-          {/* Desktop Call to Action */}
-          <div className="hidden lg:flex items-center">
+          {/* Desktop CTA */}
+          <div className="hidden lg:flex">
             <a
               href={WHATSAPP_ORDER_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center px-5 py-2 border border-transparent rounded-full shadow-sm text-xs font-bold uppercase tracking-wide text-white bg-brand-spice hover:bg-brand-spice-hover transition-all duration-300 hover:shadow-lg hover:shadow-brand-spice/20 transform hover:-translate-y-0.5 active:translate-y-0"
+              className="
+                inline-flex items-center justify-center
+                rounded-full
+                bg-brand-spice
+                px-5 py-2
+                font-sans text-[12px] font-semibold uppercase
+                tracking-wide text-white
+                shadow-sm
+                transition-all duration-300
+                hover:-translate-y-0.5
+                hover:bg-brand-spice-hover
+                hover:shadow-lg hover:shadow-brand-spice/20
+                active:translate-y-0
+              "
             >
               Order Now
             </a>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex lg:hidden">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              type="button"
-              className="inline-flex items-center justify-center p-2 rounded-md text-brand-cream hover:text-brand-gold focus:outline-none transition-colors"
-              aria-controls="mobile-menu"
-              aria-expanded={isMobileMenuOpen}
-            >
-              <span className="sr-only">Open main menu</span>
-              {isMobileMenuOpen ? (
-                // Close Icon (X)
-                <svg
-                  className="block h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-              ) : (
-                // Hamburger Icon
-                <svg
-                  className="block h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  aria-hidden="true"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-              )}
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+            className="
+              inline-flex h-10 w-10
+              items-center justify-center
+              rounded-full
+              text-brand-cream
+              transition-colors duration-300
+              hover:bg-brand-gold/10
+              hover:text-brand-gold
+              focus:outline-none
+              focus:ring-2
+              focus:ring-brand-gold/50
+              lg:hidden
+            "
+            aria-controls="mobile-menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-label={
+              isMobileMenuOpen
+                ? "Close navigation menu"
+                : "Open navigation menu"
+            }
+          >
+            {isMobileMenuOpen ? (
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 6l12 12M18 6L6 18"
+                />
+              </svg>
+            ) : (
+              <svg
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="1.7"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 7h16M4 12h16M4 17h16"
+                />
+              </svg>
+            )}
+          </button>
         </div>
       </div>
 
-      {/* Mobile Menu Panel */}
+      {/* Mobile Menu */}
       <div
-        className={`fixed inset-0 top-[64px] z-40 bg-brand-charcoal/98 backdrop-blur-xl border-t border-brand-gold/10 lg:hidden transition-all duration-500 ease-in-out ${
-          isMobileMenuOpen
-            ? "opacity-100 translate-x-0 pointer-events-auto"
-            : "opacity-0 translate-x-full pointer-events-none"
-        }`}
         id="mobile-menu"
+        className={`
+          fixed inset-x-0 top-16 bottom-0
+          z-40
+          bg-brand-charcoal/98
+          backdrop-blur-xl
+          transition-all duration-300 ease-out
+          lg:hidden
+          ${
+            isMobileMenuOpen
+              ? "visible translate-y-0 opacity-100"
+              : "invisible -translate-y-3 opacity-0"
+          }
+        `}
       >
-        <div className="px-6 py-12 flex flex-col h-full justify-between">
-          <nav className="flex flex-col space-y-5">
-            {NAV_LINKS.map((link, index) => (
+        <div className="flex h-full flex-col px-6 py-8">
+          
+          <nav
+            className="flex flex-col"
+            aria-label="Mobile navigation"
+          >
+            {NAV_LINKS.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="font-sans text-xl font-bold tracking-wide text-neutral-light hover:text-brand-gold transition-colors duration-300 border-b border-brand-gold/5 pb-2"
-                style={{
-                  transitionDelay: `${index * 50}ms`,
-                }}
+                className="
+                  border-b border-brand-gold/10
+                  py-4
+                  font-serif text-2xl font-medium
+                  text-brand-cream
+                  transition-colors duration-300
+                  hover:text-brand-gold
+                "
               >
                 {link.name}
               </Link>
             ))}
           </nav>
 
-          <div className="flex flex-col gap-6 mt-8 pb-16">
+          <div className="mt-auto pb-8 pt-10">
             <a
               href={WHATSAPP_ORDER_URL}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full inline-flex items-center justify-center px-6 py-3 rounded-full text-sm font-bold uppercase tracking-wide text-white bg-brand-spice hover:bg-brand-spice-hover transition-colors shadow-lg shadow-brand-spice/30"
+              className="
+                flex w-full items-center justify-center
+                rounded-full
+                bg-brand-spice
+                px-6 py-3.5
+                font-sans text-sm font-semibold uppercase
+                tracking-wide text-white
+                shadow-lg shadow-brand-spice/20
+                transition-all duration-300
+                hover:bg-brand-spice-hover
+              "
             >
               Order Now
             </a>
-            <div className="text-center">
-              <span className="font-sans text-xs uppercase tracking-wide text-neutral-muted">
+
+            <div className="mt-6 text-center">
+              <span className="font-sans text-[10px] uppercase tracking-[0.18em] text-neutral-muted">
                 Need Help? Call Us
               </span>
-              <p className="font-sans text-brand-gold font-bold mt-1 tracking-wide">
+
+              <p className="mt-1.5 font-sans text-sm font-medium tracking-wide text-brand-gold">
                 +92 300 1002222
               </p>
             </div>

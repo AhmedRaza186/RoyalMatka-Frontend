@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { siteConfig } from "../config/site";
@@ -12,7 +10,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen bg-brand-charcoal pt-32 pb-16 md:pt-40 md:pb-24 lg:pt-48 lg:pb-32 flex items-center overflow-hidden"
+      className="relative min-h-screen bg-brand-charcoal pt-24 pb-16 md:pt-28 md:pb-20 lg:pt-32 lg:pb-24 flex items-center overflow-hidden"
     >
       {/* Subtle background ambient lights */}
       <div className="absolute top-1/4 left-1/10 w-96 h-96 bg-brand-gold/5 rounded-full filter blur-[100px] pointer-events-none"></div>
@@ -78,10 +76,10 @@ export default function Hero() {
                 </div>
                 <div>
                   <h4 className="text-xs uppercase tracking-wider font-bold text-brand-cream">
-                    Fresh Clay Pots
+                    Traditional Matka Cooking
                   </h4>
                   <p className="text-[11px] text-neutral-muted mt-0.5">
-                    Authentic matka slow cooking
+                    Rich Pakistani Flavors
                   </p>
                 </div>
               </div>
@@ -95,7 +93,7 @@ export default function Hero() {
                 </div>
                 <div>
                   <h4 className="text-xs uppercase tracking-wider font-bold text-brand-cream">
-                    Premium Quality
+                    Freshly Prepared
                   </h4>
                   <p className="text-[11px] text-neutral-muted mt-0.5">
                     Hand-picked desi spices

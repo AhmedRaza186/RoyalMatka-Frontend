@@ -18,14 +18,20 @@
 ## Component Architecture
 
 - `Navbar.jsx` (Client Component): Sticky navigation with scroll-sensitive height and background styling.
-  - **Dimensions**: Transitions from a height of 72px (unscrolled) to a highly compact 64px (scrolled) on desktop; fixed 64px height on mobile.
-  - **Logo**: Reduced to a compact layout (scaling from 44px to 36px on scroll) to prevent visual dominance.
-  - **Typography**: Uses `Plus Jakarta Sans` (`font-sans`) for all elements including navigation links, the "ROYAL MATKA" brand name, and the Order CTA.
-  - **Interactivity**: Transitions from transparent to blurred dark backdrop (`backdrop-blur-md bg-brand-charcoal/95 border-b border-brand-gold/15`). Includes mobile responsive drawer panel.
-- `Hero.jsx` (Client Component): Editorial split layout.
+  - **Dimensions**: Fixed layout height of `64px` (h-16) on mobile and desktop.
+  - **Logo**: Compact size (36px width on mobile, 40px width on desktop) to prevent visual dominance.
+  - **Typography**: Uses `Cormorant Garamond` (`font-serif`) for the "Royal Matka" brand name and mobile navigation links; and `Plus Jakarta Sans` (`font-sans`) for body text, subtitles, desktop navigation links, and Order CTA.
+  - **Interactivity**: Transitions from transparent to a blurred charcoal backdrop (`backdrop-blur-xl bg-brand-charcoal/90 border-b border-brand-gold/10`). Includes mobile responsive drawer panel.
+- `Hero.jsx` (Server Component): Editorial split layout.
   - Left column: Main heading (`h1` in Cormorant Garamond), supporting copy, CTAs, and structural trust badges.
   - Right column: Layered circular collage of food dishes with golden frames and hover transitions.
+- `MenuPreview.jsx` (Client Component): Signature dishes showcase and menu preview.
+  - **Layout**: Responsive 3-column grid on desktop, single-column stacked layout on mobile. Cards feature organic clay pot food images with radial shadow overlays.
+  - **Typography**: Headings in `Cormorant Garamond` (`font-serif`), cards details, buttons, and subheadings in `Plus Jakarta Sans` (`font-sans`).
+  - **Data Structure**: All product data (naming, descriptions, images, tags, pricing arrays) is kept in a single structured `SIGNATURE_ITEMS` array for easy maintenance.
+  - **Interactivity**: Hover image scaling and direct WhatsApp order CTA linked to the centralized `siteConfig.whatsappNumber`.
 
 ## Contact Configuration
-- **WhatsApp Orders**: A temporary placeholder contact number (`923001002222`) is set via `PLACEHOLDER_WHATSAPP_NUMBER` in `Navbar.jsx` and `Hero.jsx`. Make sure to replace this in production.
+- **WhatsApp Orders**: Configured centrally via `siteConfig.whatsappNumber` in `src/app/config/site.js`. Employs a temporary placeholder number (`923001002222`) with `displayPhone` representation.
+
 
